@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' blob: https://ntfy.sh wss://ntfy.sh wss://broker.emqx.io:8084 wss://broker.hivemq.com:8884; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#2f6fed">
+<title>Тропка Онлайн</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="screen" id="start">
+  <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Тропка Онлайн</div>
+  <p class="muted">Файлы и текст между двумя телефонами напрямую, без установки и без сервера, который видит ваши файлы.</p>
+  <button class="btn primary big" id="create">Создать связь</button>
+  <p class="muted small">Откроется QR-код. Второй телефон сканирует его камерой — и вы соединены.</p>
+</main>
+
+<main class="screen" id="invite" hidden>
+  <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Тропка Онлайн</div>
+  <p>Наведите камеру второго телефона на QR-код или отправьте ему ссылку.</p>
+  <div class="qr" id="qr"></div>
+  <div class="row">
+    <button class="btn" id="copy">Скопировать ссылку</button>
+    <button class="btn" id="share" hidden>Отправить ссылку</button>
+  </div>
+  <p class="status" id="invite-status">Ждём второй телефон…</p>
+  <p class="muted small">Ссылка одноразовая и содержит ключ шифрования. Не публикуйте её.</p>
+</main>
+
+<main class="screen chat" id="chat" hidden>
+  <header class="top">
+    <div class="brand small-brand"><span class="brand-mark" aria-hidden="true"></span>Тропка</div>
+    <span class="status" id="chat-status">Соединяемся…</span>
+  </header>
+  <div class="feed" id="feed" aria-live="polite"></div>
+  <p class="empty muted" id="empty">Выберите файл или напишите текст — он сразу появится на втором телефоне.</p>
+  <form class="composer" id="composer">
+    <button class="btn icon" type="button" id="attach" aria-label="Прикрепить файл">📎</button>
+    <input type="file" id="file" multiple hidden>
+    <input class="text" id="text" type="text" placeholder="Текст…" autocomplete="off">
+    <button class="btn primary" type="submit" id="send">➤</button>
+  </form>
+</main>
+
+<main class="screen" id="fail" hidden>
+  <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Тропка Онлайн</div>
+  <p id="fail-text">Не удалось соединиться напрямую.</p>
+  <button class="btn primary" id="again">Начать заново</button>
+</main>
+
+<p class="note"><a class="btn small" href="https://dalink.to/olegche" target="_blank" rel="noopener">❤ Помощь проекту</a></p>
+
+<script src="qrcode.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
